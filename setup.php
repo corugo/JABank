@@ -22,7 +22,7 @@ $sql2 = "CREATE TABLE IF NOT EXISTS logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     datahora DATETIME NOT NULL,
     cpf VARCHAR(11) NOT NULL,
-	name VARCHAR(100) NOT NULL
+	name VARCHAR(100) NOT NULL,
     operacao VARCHAR(50) NOT NULL,
     quantidade INT NOT NULL,
     cash INT NOT NULL,
