@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $celular = $_POST['celular'];
     $email = $_POST['email'];
+    $usuario = $_SESSION["name"];
 
     // Criar conexão
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -27,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO users (cpf, cash, name, data_cadastro, fone, email) VALUES ('$cpf', $cash, '$name', NOW(), '$celular', '$email')";
 
     if ($conn->query($sql) === TRUE) {
-		$sql = "INSERT INTO logs (datahora, cpf, operacao, quantidade) VALUES (NOW(), '$cpf', 'cadastro', 0)";
+		$sql = "INSERT INTO logs (datahora, cpf, operacao, descricao, quantidade, usuario, name) VALUES (NOW(), '$cpf', 'cadastro', 'Cadastro', 0, '$usuario', '$name')";
 
 			if ($conn->query($sql) === TRUE) {
                 header("Location: logs.php");

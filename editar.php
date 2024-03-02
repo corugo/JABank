@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_user_sql = "SELECT * FROM users WHERE cpf='$cpf'";
     $user_result = $conn->query($check_user_sql);
     $user_row = $user_result->fetch_assoc();
-    $name = $user_row['name'];
+    // $name = $user_row['name'];
     $cash = $user_row['cash'];
 
     // Preparar e executar a consulta SQL para inserir os dados
