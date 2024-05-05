@@ -8,15 +8,27 @@
     include('config.php');
 
     $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Verifica a conexão
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
     $usuario = $_POST["usuario"];
     $senha = $_POST["senha"];
 
-    $sql = "SELECT * FROM users
-            WHERE cpf = '{$usuario}'
-            AND senha = '{$senha}'";
-    $res = $conn->query($sql) or die($conn->error);
+    // Prepara a consulta SQL com uma declaração preparada
+    $sql = "SELECT * FROM users WHERE cpf = ? AND senha = ?";
+    $stmt = $conn->prepare($sql);
 
+    // Vincula parâmetros
+    $stmt->bind_param("ss", $usuario, $senha);
+
+    // Executa a consulta
+    $stmt->execute();
+
+    // Obtém os resultados
+    $res = $stmt->get_result();
     $row = $res->fetch_object();
     $qtd = $res->num_rows;
 
