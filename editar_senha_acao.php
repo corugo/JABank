@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "UPDATE users SET senha='$senha' WHERE cpf='$cpf'";
 
     if ($conn->query($sql) === TRUE) {
-		$sql = "INSERT INTO logs (datahora, cpf, operacao, cash, descricao, usuario, name) VALUES (NOW(), '$cpf', 'atualizado', $cash, 'Atualização de senha', '$usuario', '$name')";
+		$sql = "INSERT INTO logs (datahora, cpf, operacao, cash, descricao, usuario, quantidade, name) VALUES (NOW(), '$cpf', 'atualizado', $cash, 'Atualização de senha', '$usuario', 0, '$name')";
 
 			if ($conn->query($sql) === TRUE) {
                 header("Location: logs.php");
