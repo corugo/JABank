@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO users (cpf, cash, name, data_cadastro, fone, email) VALUES ('$cpf', $cash, '$name', NOW(), '$celular', '$email')";
 
     if ($conn->query($sql) === TRUE) {
-		$sql = "INSERT INTO logs (datahora, cpf, operacao, descricao, quantidade, usuario, name) VALUES (NOW(), '$cpf', 'cadastro', 'Cadastro', 0, '$usuario', '$name')";
+		$sql = "INSERT INTO logs (datahora, cpf, cash, operacao, descricao, quantidade, usuario, name) VALUES (NOW(), '$cpf', 0, 'cadastro', 'Cadastro', 0, '$usuario', '$name')";
 
 			if ($conn->query($sql) === TRUE) {
                 header("Location: logs.php");
