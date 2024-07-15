@@ -30,6 +30,15 @@ $sql2 = "CREATE TABLE IF NOT EXISTS logs (
 	usuario VARCHAR(100) NOT NULL
 )";
 
+$sql3 = "CREATE TABLE IF NOT EXISTS operacoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    operador ENUM('adicionar', 'remover'),
+    quantidade INT,
+    descricao VARCHAR(100),
+    ativo BOOLEAN
+)";
+
 if ($conn->query($sql) === TRUE) {
 	echo "Tabela users criada com sucesso!<br>";
 } else {
@@ -38,6 +47,12 @@ if ($conn->query($sql) === TRUE) {
 
 if ($conn->query($sql2) === TRUE) {
 	echo "Tabela logs criada com sucesso!";
+} else {
+	echo "Erro ao criar tabela: " . $conn->error;
+}
+
+if ($conn->query($sql3) === TRUE) {
+	echo "Tabela operacoes criada com sucesso!";
 } else {
 	echo "Erro ao criar tabela: " . $conn->error;
 }

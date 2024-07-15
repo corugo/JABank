@@ -3,60 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuários</title>
-    
+    <title>Extrato</title>
+    <style>
+        /* Estilos de exemplo para a tabela */
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 	<?php include 'header_anon.php'; ?>
     <div class="d-flex justify-content-center">
-        <h1 class="display-1">JACoin</h1>
+        <h1 class="display-4">Extrato</h1>
     </div>
     <div class="d-flex justify-content-center">
-        <h1 class="display-5">Pódio</h1>
+        <form action="" method="GET" class="d-flex">
+            <input class="form-control me-2" placeholder="CPF" type="text" id="cpf" name="cpf" value="<?php echo isset($_GET['cpf']) ? $_GET['cpf'] : ''; ?>" aria-label="Search">
+            <input class="btn btn-outline-success" type="submit" value="Filtrar">
+        </form>
     </div>
     <div class="d-flex justify-content-center">
-        <table class="table w-auto table-striped">
-            <tr>
-                <th>#</th>
-                <th>Correntista</th>
-                <th>Saldo</th>
-            </tr>
-            <?php
-            // Incluir arquivo de configuração
-            include 'config.php';
+        
+        <?php
+        // Incluir arquivo de configuração
+        include 'config.php';
+        
+        // Criar conexão
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        
+        // Verificar conexão
+        if ($conn->connect_error) {
+            die("Conexão falhou: " . $conn->connect_error);
+        }
+        
+        // Verificar se um CPF foi fornecido para filtrar os logs
+        if (isset($_GET['cpf']) && !empty($_GET['cpf'])) {
+            
+            // Construir a consulta SQL base
+            $sql = "SELECT * FROM logs";
+            $cpf = $_GET['cpf'];
+            // Consultar nome do CPF passado
+            $sql .= " WHERE cpf='$cpf'";
+            
+            $sql2 = "SELECT name, cash FROM users
+                    WHERE cpf = '{$cpf}'";
+            $res = $conn->query($sql2) or die($conn->error);
+            $row = $res->fetch_assoc();
+            $qtd = $res->num_rows;
+            $user_cash = $row["cash"];
 
-            // Criar conexão
-            $conn = new mysqli($servername, $username, $password, $dbname);
+            // Consultar a posição do usuário no ranking
+            $sql_rank = "SELECT COUNT(*) AS posicao
+                            FROM users
+                            WHERE cash > (SELECT cash FROM users WHERE cpf = '{$cpf}');";
+            $result_rank = $conn->query($sql_rank);
+            $rank_row = $result_rank->fetch_assoc();
+            $user_rank = $rank_row["posicao"] + 1;
 
-            // Verificar conexão
-            if ($conn->connect_error) {
-                die("Conexão falhou: " . $conn->connect_error);
+            if($qtd > 0){
+                print "
+                        </div>
+                        <div class='d-flex justify-content-center'>
+                            <h1 class='display-5'>".$row["name"].$user_row["name"]."</h1>
+                        </div>
+                        <div class='d-flex justify-content-center'>
+                            <h1 class='display-6'>".$user_rank."º com ".$user_cash." JAcoins</h1>
+                        </div>
+                        <div class='d-flex justify-content-center'>";
             }
-
-            // Preparar e executar a consulta SQL para listar os usuários
-            $sql = "SELECT cpf, cash, name FROM users ORDER BY cash DESC";
+            
+            $nome = $conn->query($sql);
+            
+            // Ordena do mais novo pro mais antigo
+            $sql .= " ORDER BY id DESC";
+            
+            // Executar a consulta SQL
             $result = $conn->query($sql);
-
+            
             // Verificar se existem registros
             if ($result->num_rows > 0) {
-                $posicao = 1;
                 // Exibir os dados em uma tabela
+                echo "<table class='table w-auto table-hover table-responsive'>";
+                echo "<tr><th>ID</th><th>Data/Hora</th><th>Correntista</th><th>Operação</th><th>JACoins</th><th>Descrição</th><th>Operador</th></tr>";
                 while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td class='d-flex justify-content-end'>".$posicao." º</td>";
+                    echo "<tr".(($row["operacao"] === "remover")?" class='table-danger'":(($row["operacao"] === "adicionar")?" class='table-success'":" class='table-primary'")).">";
+                    echo "<td>".$row["id"]."</td>";
+                    echo "<td>".$row["datahora"]."</td>";
                     echo "<td>".$row["name"]."</td>";
-                    echo "<td class='d-flex justify-content-end'>".$row["cash"]."</td>";
+                    echo "<td>".(($row["operacao"] === "remover")?"-":(($row["operacao"] === "adicionar")?"+":"")).$row["quantidade"]."</td>";
+                    echo "<td>".$row["cash"]."</td>";
+                    echo "<td>".$row["descricao"]."</td>";
+                    echo "<td>".$row["usuario"]."</td>";
                     echo "</tr>";
-                    $posicao++;
                 }
+                echo "</table>";
             } else {
-                echo "<tr><td colspan='3'>Nenhum usuário cadastrado</td></tr>";
+                echo "Nenhum registro encontrado.";
             }
+        }
 
-            // Fechar conexão
-            $conn->close();
-            ?>
-        </table>
+        // Fechar conexão
+        $conn->close();
+        ?>
     </div>
 </body>
 </html>
