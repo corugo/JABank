@@ -15,11 +15,6 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">Extrato</a>
-                    </li>
-                </ul>
                 </div>
             </div>
         </nav>
