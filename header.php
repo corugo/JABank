@@ -38,6 +38,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="logs.php">Extrato</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Configurações
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item disabled" href="#">Operações</a></li>
+                            <li><a class="dropdown-item" href="operacoes.php">Listar</a></li>
+                            <li><a class="dropdown-item" href="operacoes_add.php">Adicionar</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><?php print $_SESSION["name"];?></a>
                     </li>
