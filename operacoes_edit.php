@@ -34,27 +34,41 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <div class="d-flex justify-content-center">
         <h1 class="display-4">Operações pré-definidas</h1>
     </div>
-
-    <h2>Editar operação</h2>
-    <form action="operacoes_edit_acao.php" method="POST">
-        <fieldset disabled="">
-            <div class="input-group mb-3">
-                <span class="input-group-text">ID:</span>
-                <input type="text" class="form-control" id="id" name="id" value="<?php echo $id ?>" required="">
-                <input type="hidden" name="id_hidden" value="<?php echo $id ?>">
+    <div class="d-flex justify-content-center">
+        <h1 class="display-5">Editar operação</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form action="operacoes_edit_acao.php" method="POST">
+            <fieldset disabled="">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">ID:</span>
+                    <input type="text" class="form-control" id="id" name="id" value="<?php echo $id ?>" required="">
+                </div>
+            </fieldset>
+            <input type="hidden" name="id_hidden" value="<?php echo $id ?>">
+            <div class='input-group mb-3'>
+                <span class='input-group-text'>Nome:</span>
+                <input type='text' class='form-control' id='name' name='name' value='<?= $nome ?>' required>
             </div>
-        </fieldset>
-        <label>Nome: <input type="text" name="nome" value="<?= $nome ?>" required></label><br>
-        <label>Operação: 
-            <select name="operador" required>
-                <option value="adicionar">Adicionar</option>
-                <option value="remover">Remover</option>
-            </select>
-        </label><br>
-        <label>Quantidade: <input type="number" name="quantidade" value="<?= $quantidade ?>" required></label><br>
-        <label>Descrição: <input type="text" name="descricao" value="<?= $descricao ?>" required></label><br>
-        <button type="submit" name="add">Salvar</button>
-    </form>
+            <div class='input-group mb-3'>
+                <select name="operador" class="form-select" aria-label="Default select example" required>
+                    <option value="adicionar" <?= ($operador == 'adicionar') ? 'selected' : '' ?>>Adicionar</option>
+                    <option value="remover" <?= ($operador == 'remover') ? 'selected' : '' ?>>Remover</option>
+                </select>
+            </div>
+            <div class='input-group mb-3'>
+                <span class='input-group-text'>Quantidade:</span>
+                <input type='number' class='form-control' id='quantidade' name='quantidade' value='<?= $quantidade ?>' required>
+            </div>
+            <div class='input-group mb-3'>
+                <span class='input-group-text'>Descrição:</span>
+                <input type='text' class='form-control' id='descricao' name='descricao' value='<?= $descricao ?>' required>
+            </div>
+            <div class='input-group mb-3'>
+                <input class='btn btn-outline-secondary' type='submit' value='Alterar'>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
 <?php

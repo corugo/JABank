@@ -19,18 +19,20 @@ include 'config.php';
     <div class="d-flex justify-content-center">
         <h1 class="display-4">Operações pré-definidas</h1>
     </div>
-
-    <h2>Lista de Itens</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Operador</th>
-            <th>Quantidade</th>
-            <th>Descrição</th>
-            <th>Ativo</th>
-            <th>Ações</th>
-        </tr>
+    <div class="d-flex justify-content-center">
+        <h1 class="display-5">Lista de itens</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <table class="table w-auto table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Operador</th>
+                <th>Quantidade</th>
+                <th>Descrição</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
         <?php
         // Criar conexão
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -66,25 +68,13 @@ include 'config.php';
                     <a href='operacoes_edit.php?id=<?= $item['id'] ?>'>
                         <img src='img/edit.png' alt='Editar' width='20' height='20'>
                     </a>
-                    <button type="submit" name="deactivate">Desativar</button>
+                    <a href='operacoes_desabilitar.php?id=<?= $item['id'] ?>&acao=<?= $item['ativo'] ? '0' : '1' ?>'>
+                        <img src='img/<?= $item['ativo'] ? 'desativa' : 'ativa' ?>.png' alt='<?= $item['ativo'] ? 'Desativar' : 'Ativar' ?>' width='20' height='20'>
+                    </a>
                 </td>
             </tr>
         <?php endforeach; ?>
-    </table>
-
-    <h2>Editar Item</h2>
-    <form method="POST">
-        <label>ID: <input type="number" name="id" required></label><br>
-        <label>Nome: <input type="text" name="nome" required></label><br>
-        <label>Operador: 
-            <select name="operador" required>
-                <option value="adicionar">Adicionar</option>
-                <option value="remover">Remover</option>
-            </select>
-        </label><br>
-        <label>Quantidade: <input type="number" name="quantidade" required></label><br>
-        <label>Descrição: <input type="text" name="descricao" required></label><br>
-        <button type="submit" name="edit">Editar</button>
-    </form>
+        </table>
+    </div>
 </body>
 </html>
