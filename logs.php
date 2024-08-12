@@ -69,7 +69,7 @@
                         <div class='d-flex justify-content-center'>
                         <h1 class='display-6'>".$row["name"]."</h1>
                         <a href='pagar.php?cpf=".$cpf."'>
-                        <img src='img/edit.png' alt='Editar' width='24' height='24'>
+                        <img src='img/cash.png' alt='Pagar' width='24' height='24'>
                         </a>
                         </div>
                         <div class='d-flex justify-content-center'>";
