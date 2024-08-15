@@ -18,15 +18,16 @@
             background-color: #f2f2f2;
         }
     </style>
+    <script src="js/html2pdf.js"></script>
 </head>
 <body>
 	<?php include 'header_anon.php'; ?>
     <div class="d-flex justify-content-center">
         <h1 class="display-4">Extrato</h1>
     </div>
-    <div class="d-flex justify-content-center">
+    <div id="exclude-this" class="d-flex justify-content-center">
         <form action="" method="GET" class="d-flex">
-            <input class="form-control me-2" placeholder="CPF" type="text" id="cpf" name="cpf" value="<?php echo isset($_GET['cpf']) ? $_GET['cpf'] : ''; ?>" aria-label="Search">
+            <input class="form-control me-2" placeholder="CPF" type="text" id="cpf" name="cpf" aria-label="Search">
             <input class="btn btn-outline-success" type="submit" value="Filtrar">
         </form>
     </div>
@@ -112,5 +113,17 @@
         $conn->close();
         ?>
     </div>
+
+    <!-- Botão para baixar todo o conteúdo do body como PDF -->
+    <div class="d-flex justify-content-center">
+        <button id="download" class="btn btn-outline-primary">Baixar como PDF</button>
+    </div>
+
+    <script>
+        document.getElementById("download").addEventListener("click", function () {
+            var element = document.body; // Seleciona todo o conteúdo do body
+            html2pdf().from(element).save();
+        });
+    </script>
 </body>
 </html>
