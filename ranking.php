@@ -15,6 +15,7 @@
             text-decoration: none !important;
         }
     </style>
+    <script src="js/html2pdf.js"></script>
 </head>
 <body>
 	<?php include 'header.php'; ?>
@@ -80,5 +81,16 @@
             ?>
         </table>
     </div>
+
+    <!-- Botão para baixar todo o conteúdo do body como PDF -->
+    <div class="d-flex justify-content-center">
+        <button id="download" class="btn btn-outline-primary">Baixar como PDF</button>
+    </div>
+    <script>
+        document.getElementById("download").addEventListener("click", function () {
+            var element = document.body; // Seleciona todo o conteúdo do body
+            html2pdf().from(element).save();
+        });
+    </script>
 </body>
 </html>
