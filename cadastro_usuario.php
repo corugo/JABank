@@ -27,12 +27,12 @@
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text">Celular:</span>
-                <input type="text" class="form-control" id="celular" name="celular" required>
+                <span class="input-group-text">Data de Nascimento:</span>
+                <input type="date" class="form-control" id="dob" name="dob" required>
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text">Email:</span>
-                <input type="text" class="form-control" id="email" name="email" required>
+                <span class="input-group-text">Celular:</span>
+                <input type="text" class="form-control" id="celular" name="celular" required>
             </div>
             <div class="input-group mb-3">
                 <input class="btn btn-outline-secondary" type="submit" value="Cadastrar">

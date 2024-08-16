@@ -87,10 +87,6 @@
                                 <input type='text' class='form-control' id='celular' name='celular' value='$fone' required>
                             </div>
                             <div class='input-group mb-3'>
-                                <span class='input-group-text'>Email:</span>
-                                <input type='text' class='form-control' id='email' name='email' value='$email' required>
-                            </div>
-                            <div class='input-group mb-3'>
                                 <input class='btn btn-outline-secondary' type='submit' value='Alterar'>
                             </div>
                         </form>

@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cash = 0;
     $name = $_POST['name'];
     $celular = $_POST['celular'];
-    $email = $_POST['email'];
     $usuario = $_SESSION["name"];
 
     // Criar conexão
@@ -25,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Preparar e executar a consulta SQL para inserir os dados
-    $sql = "INSERT INTO users (cpf, cash, name, data_cadastro, fone, email) VALUES ('$cpf', $cash, '$name', NOW(), '$celular', '$email')";
+    $sql = "INSERT INTO users (cpf, cash, name, data_cadastro, fone) VALUES ('$cpf', $cash, '$name', NOW(), '$celular')";
 
     if ($conn->query($sql) === TRUE) {
 		$sql = "INSERT INTO logs (datahora, cpf, cash, operacao, descricao, quantidade, usuario, name) VALUES (NOW(), '$cpf', 0, 'cadastro', 'Cadastro', 0, '$usuario', '$name')";

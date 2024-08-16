@@ -12,10 +12,10 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
 	cash INT,
 	name VARCHAR(100),
 	fone VARCHAR(20),
-	email VARCHAR(100),
 	senha VARCHAR(100),
 	tipo CHAR(1),
-	data_cadastro DATETIME NOT NULL
+	data_cadastro DATETIME NOT NULL,
+	data_nascimento DATETIME NOT NULL
 )";
 
 $sql2 = "CREATE TABLE IF NOT EXISTS logs (
