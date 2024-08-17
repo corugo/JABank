@@ -46,13 +46,13 @@ if ($conn->query($sql) === TRUE) {
 }
 
 if ($conn->query($sql2) === TRUE) {
-	echo "Tabela logs criada com sucesso!";
+	echo "Tabela logs criada com sucesso!<br>";
 } else {
 	echo "Erro ao criar tabela: " . $conn->error;
 }
 
 if ($conn->query($sql3) === TRUE) {
-	echo "Tabela operacoes criada com sucesso!";
+	echo "Tabela operacoes criada com sucesso!<br>";
 } else {
 	echo "Erro ao criar tabela: " . $conn->error;
 }

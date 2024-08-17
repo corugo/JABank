@@ -63,7 +63,9 @@
             // Consultar a posição do usuário no ranking
             $sql_rank = "SELECT COUNT(*) AS posicao
                             FROM users
-                            WHERE cash > (SELECT cash FROM users WHERE cpf = '{$cpf}');";
+                            WHERE cash > (SELECT cash FROM users WHERE cpf = '{$cpf}')
+                                OR (cash = (SELECT cash FROM users WHERE cpf = '{$cpf}') 
+                                    AND data_nascimento > (SELECT data_nascimento FROM users WHERE cpf = '{$cpf}'));";
             $result_rank = $conn->query($sql_rank);
             $rank_row = $result_rank->fetch_assoc();
             $user_rank = $rank_row["posicao"] + 1;

@@ -46,7 +46,7 @@
             }
 
             // Preparar e executar a consulta SQL para listar os usuários
-            $sql = "SELECT cpf, cash, name FROM users ORDER BY cash DESC";
+            $sql = "SELECT cpf, cash, name FROM users ORDER BY cash DESC, data_nascimento DESC";
             $result = $conn->query($sql);
 
             // Verificar se existem registros
