@@ -19,19 +19,34 @@ include 'config.php';
     <div class="d-flex justify-content-center">
         <h1 class="display-4">Operações pré-definidas</h1>
     </div>
-
-    <h2>Adicionar operação</h2>
-    <form action="operacoes_add_acao.php" method="POST">
-        <label>Nome: <input type="text" name="nome" required></label><br>
-        <label>Operação: 
-            <select name="operador" required>
-                <option value="adicionar">Adicionar</option>
-                <option value="remover">Remover</option>
-            </select>
-        </label><br>
-        <label>Quantidade: <input type="number" name="quantidade" required></label><br>
-        <label>Descrição: <input type="text" name="descricao" required></label><br>
-        <button type="submit" name="add">Adicionar</button>
-    </form>
+    <div class="d-flex justify-content-center">
+        <h1 class="display-5">Adicionar operação</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form action="operacoes_add_acao.php" method="POST">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Nome:</span>
+                <input type="text" class="form-control" name="nome" required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Operação</span>
+                <select class="form-select" name="operador">
+                    <option value="adicionar">Adicionar</option>
+                    <option value="remover">Remover</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Quantidade:</span>
+                <input type="text" class="form-control" name="quantidade" required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Descrição:</span>
+                <input type="text" class="form-control" name="descricao" required>
+            </div>
+            <div class="input-group mb-3">
+                <input class="btn btn-outline-secondary" type="submit" value="Adicionar">
+            </div>
+        </form>
+    </div>
 </body>
 </html>
